@@ -20,7 +20,6 @@ the following command:
 
 ```sh
 npm install
-npm i -g typescript
 npm run build
 ```
 
@@ -35,6 +34,9 @@ Browse to the project folder, then run the below command.
 ```sh
 npm start --config config_file.json
 ```
+
+Two files are created in the `results` folder, one for a summary of the tile results, and the other for the entire path of the player.
+The files are prepended with the name of the `config_file.json` from the script running
 
 # Creating a config file
 
