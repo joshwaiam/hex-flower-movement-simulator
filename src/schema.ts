@@ -6,6 +6,7 @@ export const args_schema = z.object({
 
 export const config_schema = z.object({
   starting_position: z.number(),
+  turns_to_simulate: z.number().min(1),
   blockers: z
     .object({
       tile: z.coerce.number().min(2).max(19),

@@ -1,5 +1,6 @@
 export type Config = {
   starting_position: number;
+  turns_to_simulate: number;
   blockers: Array<{
     tile: number;
     edge: number;

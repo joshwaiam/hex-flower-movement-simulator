@@ -31,10 +31,7 @@ export async function prompt(query: string): Promise<string | undefined> {
  * @param results The data to write to the file
  * @returns void
  */
-export function write_results(
-  results: Array<{ player_position: number }>,
-  config_path: string
-): void {
+export function write_results(results: unknown, config_path: string): void {
   // TODO Write to CSV rather than JSON
   const json = JSON.stringify(results, undefined, 2);
   const output_path = `${config_path.replace(

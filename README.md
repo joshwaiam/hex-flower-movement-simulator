@@ -15,6 +15,7 @@ A config file is a JSON file that contains information necessary for the simulat
 ```json
 {
   "starting_position": 1,
+  "turns_to_simulate": 10000,
   "blockers": [],
   "teleporters": []
 }
@@ -25,6 +26,7 @@ A config file is a JSON file that contains information necessary for the simulat
 ```json
 {
   "starting_position": 1,
+  "turns_to_simulate": 10000,
   "blockers": [
     { "tile": 19, "edge": 12 },
     { "tile": 11, "edge": 4 },
@@ -58,6 +60,10 @@ edge of a tile.
 ### starting_position
 
 The starting position (tile) of the player. This is a number between 1 and 19.
+
+### turns_to_simulate
+
+The number of times the dice should roll and the player should move.
 
 ### blockers
 

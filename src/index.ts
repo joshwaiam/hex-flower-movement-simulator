@@ -9,14 +9,50 @@ import util from "util";
 (async () => {
   try {
     const { config_path } = parse_args();
-    const { starting_position, blockers, teleporters } =
+    const { starting_position, turns_to_simulate, blockers, teleporters } =
       get_config(config_path);
 
     const tiles = build_tiles(blockers, teleporters);
-    console.info(util.inspect(tiles, { depth: null, colors: true }));
 
-    // const [die1, die2] = roll_2d6();
-    // console.info(`You rolled a ${die1} and a ${die2}`);
+    const results: Array<{
+      roll: number;
+      player_position: number;
+    }> = [];
+
+    // Simulate the turns
+    for (let i = 0; i <= turns_to_simulate; i++) {
+      // If it's the first turn, initialize the history with the starting position
+      if (i == 0) {
+        results.push({
+          roll: -1,
+          player_position: starting_position,
+        });
+        continue;
+      }
+
+      const [die1, die2] = roll_2d6();
+      const roll = (die1 + die2) as DiceRollValues;
+
+      const current_player_position = tiles.find(
+        (t) => t.id === results[i - 1].player_position
+      );
+
+      if (!current_player_position) {
+        throw new Error(`Invalid player position, turn # ${i}`);
+      }
+
+      const player_position = current_player_position.edges[roll].is_blocked
+        ? current_player_position.id
+        : current_player_position.edges[roll].neighbor_id;
+
+      results.push({
+        roll,
+        player_position,
+      });
+    }
+
+    // Print the results
+    console.log(util.inspect(results, false, null, true));
   } catch (e) {
     console.error("Script cancelled due to error!", e);
     return;

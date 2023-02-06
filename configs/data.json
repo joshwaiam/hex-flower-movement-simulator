@@ -1,5 +1,6 @@
 {
   "starting_position": 1,
+  "turns_to_simulate": 10000,
   "blockers": [
     { "tile": 19, "edge": 12 },
     { "tile": 11, "edge": 4 },
