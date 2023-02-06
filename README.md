@@ -113,5 +113,8 @@ that teleport the player to another tile.
 
 ## (config)
 
-The path to the config file. This is a required option.
-Config file must be located in the `dist/configs` folder.
+The config file name. Config file must be located in the `dist/configs` folder.
+
+### Usage
+
+`npm start config_file.json`
