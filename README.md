@@ -74,7 +74,7 @@ A config file is a JSON file that contains information necessary for the simulat
 
 ## Tile numbering
 
-Tiles are numbered from 1 to 19, starting at the top center.
+Tiles are numbered from 1 to 19, starting at the bottom center.
 
 ![Tile numbering](./documentation/tiles.png)
 
