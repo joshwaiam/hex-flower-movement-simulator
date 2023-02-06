@@ -73,11 +73,9 @@ import { createObjectCsvWriter as csvWriter } from "csv-writer";
  */
 function parse_args(): { config_path: string } {
   const unsafe_args = minimist(process.argv.slice(2));
-  const args = args_schema.safeParse(unsafe_args);
+  const args = args_schema.parse(unsafe_args);
 
-  const config_path = `./configs/${
-    args.success ? args.data.config : "data.json"
-  }`;
+  const config_path = `./configs/${args.config}`;
 
   return {
     config_path,
@@ -128,7 +126,20 @@ function build_tiles(
   blockers.forEach((blocker) => {
     const tile = tiles.find((t) => t.id === blocker.tile);
     if (tile) {
-      tile.edges[blocker.edge as DiceRollValues].is_blocked = true;
+      // Note the current neighbor_id so that we can replace both edge
+      // values. This is because many movements share a single edge,
+      // such as 2-3, 4-5, 6-7, 8-9, 10-11
+      const current_neighbor_id =
+        tile.edges[blocker.edge as DiceRollValues].neighbor_id;
+
+      // Update both linked edge values
+      Object.keys(tile.edges).forEach((edge) => {
+        const e = Number(edge) as DiceRollValues;
+
+        if (tile.edges[e].neighbor_id === current_neighbor_id) {
+          tile.edges[e].is_blocked = true;
+        }
+      });
     }
   });
 

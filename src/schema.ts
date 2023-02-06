@@ -9,7 +9,7 @@ export const config_schema = z.object({
   turns_to_simulate: z.number().min(1),
   blockers: z
     .object({
-      tile: z.coerce.number().min(2).max(19),
+      tile: z.coerce.number().min(1).max(19),
       edge: z.coerce.number().min(2).max(12),
     })
     .array(),
