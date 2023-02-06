@@ -1,2 +1,0 @@
-This file is only here to ensure the results directory is created.
-This can be deleted after you install download the project.

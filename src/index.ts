@@ -73,9 +73,16 @@ import { createObjectCsvWriter as csvWriter } from "csv-writer";
  */
 function parse_args(): { config_path: string } {
   const unsafe_args = minimist(process.argv.slice(2));
-  const args = args_schema.parse(unsafe_args);
+  let config_path;
 
-  const config_path = `./configs/${args.config}`;
+  console.info("process.NODE_ENV", process.env.NODE_ENV);
+
+  if (process.env.NODE_ENV === "production") {
+    const args = args_schema.parse(unsafe_args);
+    config_path = `./dist/configs/${args.config}`;
+  } else {
+    config_path = "./src/configs/data.json";
+  }
 
   return {
     config_path,

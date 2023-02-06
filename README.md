@@ -25,17 +25,18 @@ npm run build
 
 # Usage
 
-Browse to the project folder, then run the below command.
-
-> Note: The config file must be located in the `configs` folder. However, you do not
-> need to specify the full path to the config file. The script will automatically
-> look in the `configs` folder.
+1. Create a config file in `dist/configs` (see below for more information on creating a config file)
+1. Open a terminal in in the root of the project directory, and enter the following command:
 
 ```sh
 npm start --config config_file.json
 ```
 
-Two files are created in the `results` folder, one for a summary of the tile results, and the other for the entire path of the player.
+> Note: The config file must be located in the `dist/configs` folder. However, you do not
+> need to specify the full path to the config file. The script will automatically
+> look in the `dist/configs` folder.
+
+Two files are created in the `dist/results` folder, one for a summary of the tile results, and the other for the entire path of the player.
 The files are prepended with the name of the `config_file.json` from the script running
 
 # Creating a config file
