@@ -6,6 +6,10 @@ starting position, number of turns to simulate, and the blockers and teleporters
 script then outputs the number of times the player landed on each tile, as well as
 the entire path of the player.
 
+# Requirements
+
+- Node.js (https://nodejs.org/en/)
+
 # Installation
 
 Download the repository to your computer. This can be done by clicking the green
