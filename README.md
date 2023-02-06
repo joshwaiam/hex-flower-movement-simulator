@@ -8,7 +8,10 @@ the entire path of the player.
 
 # Installation
 
-Download the repository to your computer. Open a terminal in the folder, then run
+Download the repository to your computer. This can be done by clicking the green
+Code button and selecting Download ZIP.
+
+Once downloaded and extracted, open a terminal in the folder. Then run
 the following command:
 
 ```sh
@@ -18,7 +21,11 @@ npm run build
 
 # Usage
 
-Browse to the project folder, then run the following command:
+Browse to the project folder, then run the below command.
+
+> Note: The config file must be located in the `configs` folder. However, you do not
+> need to specify the full path to the config file. The script will automatically
+> look in the `configs` folder.
 
 ```sh
 npm start --config config_file.json
