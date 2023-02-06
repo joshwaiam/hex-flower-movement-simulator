@@ -20,6 +20,7 @@ the following command:
 
 ```sh
 npm install
+npm i -g typescript
 npm run build
 ```
 
@@ -96,8 +97,7 @@ The number of times the dice should roll and the player should move.
 
 ### blockers
 
-An array of objects that represent blockers. Blockers are edges of a tile that
-prevent movement in a certain direction.
+An array of objects showcasing which edges of a tile the player cannot pass through
 
 ### teleporters
 
