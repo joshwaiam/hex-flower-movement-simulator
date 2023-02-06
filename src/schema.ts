@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const args_schema = z.object({
-  config: z.string(),
+  c: z.string(),
 });
 
 export const config_schema = z.object({

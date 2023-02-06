@@ -73,8 +73,11 @@ import { createObjectCsvWriter as csvWriter } from "csv-writer";
  */
 function parse_args(): { config_path: string } {
   const unsafe_args = minimist(process.argv.slice(2));
-  const args = args_schema.parse(unsafe_args);
-  const config_path = `dist/configs/${args.config}`;
+  const config_file = unsafe_args._[0] ?? undefined;
+  if (!config_file) {
+    throw new Error("No config file specified.");
+  }
+  const config_path = `./dist/configs/${config_file}`;
 
   return {
     config_path,

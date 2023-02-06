@@ -31,7 +31,7 @@ mkdir dist/configs
 1. Open a terminal in in the root of the project directory, and enter the following command:
 
 ```sh
-npm start --config config_file.json
+npm start config_file.json
 ```
 
 > Note: The config file must be located in the `dist/configs` folder. However, you do not
@@ -111,7 +111,7 @@ that teleport the player to another tile.
 
 # Options
 
-## --config
+## (config)
 
 The path to the config file. This is a required option.
-Config file must be located in the `configs` folder.
+Config file must be located in the `dist/configs` folder.
