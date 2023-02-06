@@ -21,6 +21,8 @@ the following command:
 ```sh
 npm install
 npm run build
+mkdir dist/results
+mkdir dist/configs
 ```
 
 # Usage
