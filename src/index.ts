@@ -3,7 +3,8 @@ import minimist from "minimist";
 import fs from "fs";
 import { args_schema, config_schema } from "./schema";
 import type { Config, DiceRollValues, Tile } from "./types";
-import util from "util";
+import { z } from "zod";
+import { createObjectCsvWriter as csvWriter } from "csv-writer";
 
 // Main function that runs the program
 (async () => {
@@ -30,8 +31,7 @@ import util from "util";
         continue;
       }
 
-      const [die1, die2] = roll_2d6();
-      const roll = (die1 + die2) as DiceRollValues;
+      const roll = roll_2d6();
 
       const current_player_position = tiles.find(
         (t) => t.id === results[i - 1].player_position
@@ -51,8 +51,15 @@ import util from "util";
       });
     }
 
-    // Print the results
-    console.log(util.inspect(results, false, null, true));
+    // Write the results
+    const [history_output, summary_output] = write_results(
+      results,
+      config_path
+    );
+
+    console.info(
+      `Done! Results written to ${history_output} and ${summary_output}`
+    );
   } catch (e) {
     console.error("Script cancelled due to error!", e);
     return;
@@ -95,8 +102,15 @@ function get_config(config_path: string): Config {
 /**
  * Rolls two 6-sided dice
  */
-function roll_2d6(): [number, number] {
-  return [Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 6) + 1];
+function roll_2d6(): DiceRollValues {
+  const die1 = Math.floor(Math.random() * 6) + 1;
+  const die2 = Math.floor(Math.random() * 6) + 1;
+  const roll = z
+    .number()
+    .min(2)
+    .max(12)
+    .parse(die1 + die2);
+  return roll as DiceRollValues;
 }
 
 /**
@@ -140,4 +154,52 @@ function build_tiles(
   });
 
   return tiles;
+}
+
+/**
+ * Writes data results to a file.
+ * @param results The data to write to the file
+ * @returns void
+ */
+export function write_results(
+  results: Array<{ roll: number; player_position: number }>,
+  config_path: string
+): [string, string] {
+  const timestamp = Date.now().toString();
+  const base_path = config_path.replace("configs", "results");
+  const history_output = `${base_path}_history${timestamp}.csv`;
+  const summary_output = `${base_path}_summary${timestamp}.csv`;
+
+  // Output the entire match history
+  let writer = csvWriter({
+    path: history_output,
+    header: [
+      { id: "turn", title: "Turn" },
+      { id: "roll", title: "Roll" },
+      { id: "player_position", title: "Player Tile" },
+    ],
+  });
+  writer.writeRecords(results.map((result, i) => ({ ...result, turn: i })));
+
+  // Output the summary of each tile
+  writer = csvWriter({
+    path: summary_output,
+    header: [
+      { id: "tile", title: "Tile" },
+      { id: "count", title: "Count" },
+    ],
+  });
+  const unique_tiles = new Set(results.map((result) => result.player_position));
+  const summary_results = [];
+
+  for (const tile of unique_tiles) {
+    summary_results.push({
+      tile,
+      count: results.filter((result) => result.player_position === tile).length,
+    });
+  }
+
+  writer.writeRecords(summary_results);
+
+  return [history_output, summary_output];
 }
