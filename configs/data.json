@@ -1,0 +1,13 @@
+{
+  "starting_position": 1,
+  "blockers": [
+    { "tile": 19, "edge": 12 },
+    { "tile": 11, "edge": 4 },
+    { "tile": 4, "edge": 9 },
+    { "tile": 14, "edge": 11 }
+  ],
+  "teleporters": [
+    { "tile": 9, "edge": 8, "target": 13 },
+    { "tile": 2, "edge": 6, "target": 14 }
+  ]
+}
