@@ -83,7 +83,7 @@ Tiles are numbered from 1 to 19, starting at the bottom center.
 
 ## Edge numbering
 
-Edges are numbered from 1 to 12, starting at the top edge and moving clockwise.
+Edges are numbered from 2 to 12, starting at the top edge and moving clockwise.
 The edges are numbered based on the hex flower navigation rules. In most cases, the same
 edge can be denoted by two numbers. For example, Edge 2 and Edge 3 are both for the top-left
 edge of a tile.
