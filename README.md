@@ -107,7 +107,7 @@ An array of objects showcasing which edges of a tile the player cannot pass thro
 ### teleporters
 
 An array of objects that represent teleporters. Teleporters are edges of a tile
-that teleport the player to another tile.
+that teleport the player to another tile (denoted by the `target` value).
 
 # Options
 
